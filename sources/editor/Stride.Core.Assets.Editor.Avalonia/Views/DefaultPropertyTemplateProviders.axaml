@@ -853,6 +853,10 @@
             <DataTriggerBehavior Binding="{Binding NodeValue}" Value="{x:Static cpqvm:NodeViewModel.DifferentValues}">
               <ChangePropertyAction PropertyName="PlaceholderText" Value="{sd:LocalizeString (Different values)}"/>
             </DataTriggerBehavior>
+            <!-- An empty text commits a null value, as the member type allows it -->
+            <DataTriggerBehavior Binding="{Binding Type, Converter={sd:IsNullable}}" Value="True">
+              <ChangePropertyAction PropertyName="AllowNull" Value="True"/>
+            </DataTriggerBehavior>
           </Interaction.Behaviors>
         </sd:NumericTextBox>
       </Grid>
@@ -874,6 +878,10 @@
         <DataTriggerBehavior Binding="{Binding NodeValue}" Value="{x:Static cpqvm:NodeViewModel.DifferentValues}">
           <ChangePropertyAction PropertyName="PlaceholderText" Value="{sd:LocalizeString (Different values)}"/>
         </DataTriggerBehavior>
+        <!-- An empty text commits a null value, as the member type allows it -->
+        <DataTriggerBehavior Binding="{Binding Type, Converter={sd:IsNullable}}" Value="True">
+          <ChangePropertyAction PropertyName="AllowNull" Value="True"/>
+        </DataTriggerBehavior>
       </Interaction.Behaviors>
     </sd:NumericTextBox>
   </DataTemplate>
@@ -894,6 +902,10 @@
       <Interaction.Behaviors>
         <DataTriggerBehavior Binding="{Binding NodeValue}" Value="{x:Static cpqvm:NodeViewModel.DifferentValues}">
           <ChangePropertyAction PropertyName="PlaceholderText" Value="{sd:LocalizeString (Different values)}"/>
+        </DataTriggerBehavior>
+        <!-- An empty text commits a null value, as the member type allows it -->
+        <DataTriggerBehavior Binding="{Binding Type, Converter={sd:IsNullable}}" Value="True">
+          <ChangePropertyAction PropertyName="AllowNull" Value="True"/>
         </DataTriggerBehavior>
       </Interaction.Behaviors>
     </sd:NumericTextBox>
@@ -943,6 +955,10 @@
           <Interaction.Behaviors>
             <DataTriggerBehavior Binding="{Binding NodeValue}" Value="{x:Static cpqvm:NodeViewModel.DifferentValues}">
               <ChangePropertyAction PropertyName="PlaceholderText" Value="{sd:LocalizeString (Different values)}"/>
+            </DataTriggerBehavior>
+            <!-- An empty text commits a null value, as the member type allows it -->
+            <DataTriggerBehavior Binding="{Binding Type, Converter={sd:IsNullable}}" Value="True">
+              <ChangePropertyAction PropertyName="AllowNull" Value="True"/>
             </DataTriggerBehavior>
           </Interaction.Behaviors>
         </sd:NumericTextBox>
@@ -1188,6 +1204,10 @@
         <Interaction.Behaviors>
           <DataTriggerBehavior Binding="{Binding NodeValue}" Value="{x:Static cpqvm:NodeViewModel.DifferentValues}">
             <ChangePropertyAction PropertyName="PlaceholderText" Value="{sd:LocalizeString (Different values)}"/>
+          </DataTriggerBehavior>
+          <!-- An empty text commits a null value, as the member type allows it -->
+          <DataTriggerBehavior Binding="{Binding Type, Converter={sd:IsNullable}}" Value="True">
+            <ChangePropertyAction PropertyName="AllowNull" Value="True"/>
           </DataTriggerBehavior>
         </Interaction.Behaviors>
       </sd:NumericTextBox>

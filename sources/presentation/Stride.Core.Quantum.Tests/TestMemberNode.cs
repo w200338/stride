@@ -11,6 +11,8 @@ public class TestMemberNode
     {
         public int IntValue { get; set; }
         public string? StringValue { get; set; }
+        public float? NullableFloatValue { get; set; }
+        public int? NullableIntValue { get; set; }
         public NestedClass? Reference { get; set; }
     }
 
@@ -55,6 +57,44 @@ public class TestMemberNode
             Assert.Equal(newValue, obj.IntValue);
         else
             Assert.Equal(newValue, obj.StringValue);
+    }
+
+    [Theory]
+    // A boxed double targeting a nullable float member (e.g. values coming from numeric text boxes).
+    [InlineData(nameof(SimpleClass.NullableFloatValue), 1.5)]
+    // A boxed double targeting a nullable int member.
+    [InlineData(nameof(SimpleClass.NullableIntValue), 2.0)]
+    public void TestMemberNodeUpdateNullableValue(string memberName, object newValue)
+    {
+        var obj = new SimpleClass { NullableFloatValue = 0f, NullableIntValue = 0 };
+        var nodeContainer = new NodeContainer();
+        var parentNode = nodeContainer.GetOrCreateNode(obj);
+        var memberNode = parentNode[memberName];
+
+        memberNode.Update(newValue);
+
+        if (memberName == nameof(SimpleClass.NullableFloatValue))
+        {
+            Assert.Equal((float)(double)newValue, obj.NullableFloatValue);
+        }
+        else
+        {
+            Assert.Equal((int)(double)newValue, obj.NullableIntValue);
+        }
+    }
+
+    [Fact]
+    public void TestMemberNodeUpdateNullableValueToNull()
+    {
+        var obj = new SimpleClass { NullableFloatValue = 1.5f, NullableIntValue = 42 };
+        var nodeContainer = new NodeContainer();
+        var parentNode = nodeContainer.GetOrCreateNode(obj);
+
+        parentNode[nameof(SimpleClass.NullableFloatValue)].Update(null);
+        parentNode[nameof(SimpleClass.NullableIntValue)].Update(null);
+
+        Assert.Null(obj.NullableFloatValue);
+        Assert.Null(obj.NullableIntValue);
     }
 
     [Fact]
